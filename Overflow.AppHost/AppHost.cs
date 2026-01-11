@@ -8,5 +8,9 @@ var keyCloak = builder
     .WithDataBindMount("./keycloak-data")
     .WithLifetime(ContainerLifetime.Persistent);
 
+// Question Services 
+var questionsService = builder.AddProject<Projects.QuestionServices>("Question-Services")
+    .WithReference(keyCloak)
+    .WaitFor(keyCloak);
 
 builder.Build().Run();
